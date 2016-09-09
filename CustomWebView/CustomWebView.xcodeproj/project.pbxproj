@@ -15,6 +15,9 @@
 		F00638001D82A1D80073C95D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F00637FE1D82A1D80073C95D /* LaunchScreen.storyboard */; };
 		F006380B1D82A1D90073C95D /* CustomWebViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F006380A1D82A1D90073C95D /* CustomWebViewTests.m */; };
 		F00638161D82A1D90073C95D /* CustomWebViewUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F00638151D82A1D90073C95D /* CustomWebViewUITests.m */; };
+		F00638281D82B3F00073C95D /* SafariViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F00638271D82B3F00073C95D /* SafariViewController.m */; };
+		F006382E1D82C3270073C95D /* CustomWebViewCotroller.m in Sources */ = {isa = PBXBuildFile; fileRef = F006382D1D82C3270073C95D /* CustomWebViewCotroller.m */; };
+		F00638311D82C3EC0073C95D /* WKWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F00638301D82C3EC0073C95D /* WKWebViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,12 @@
 		F00638111D82A1D90073C95D /* CustomWebViewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CustomWebViewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F00638151D82A1D90073C95D /* CustomWebViewUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomWebViewUITests.m; sourceTree = "<group>"; };
 		F00638171D82A1D90073C95D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F00638261D82B3F00073C95D /* SafariViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SafariViewController.h; sourceTree = "<group>"; };
+		F00638271D82B3F00073C95D /* SafariViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SafariViewController.m; sourceTree = "<group>"; };
+		F006382C1D82C3270073C95D /* CustomWebViewCotroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomWebViewCotroller.h; sourceTree = "<group>"; };
+		F006382D1D82C3270073C95D /* CustomWebViewCotroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomWebViewCotroller.m; sourceTree = "<group>"; };
+		F006382F1D82C3EC0073C95D /* WKWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKWebViewController.h; sourceTree = "<group>"; };
+		F00638301D82C3EC0073C95D /* WKWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKWebViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +114,12 @@
 				F00637F41D82A1D80073C95D /* AppDelegate.m */,
 				F00637F61D82A1D80073C95D /* ViewController.h */,
 				F00637F71D82A1D80073C95D /* ViewController.m */,
+				F006382C1D82C3270073C95D /* CustomWebViewCotroller.h */,
+				F006382D1D82C3270073C95D /* CustomWebViewCotroller.m */,
+				F00638261D82B3F00073C95D /* SafariViewController.h */,
+				F00638271D82B3F00073C95D /* SafariViewController.m */,
+				F006382F1D82C3EC0073C95D /* WKWebViewController.h */,
+				F00638301D82C3EC0073C95D /* WKWebViewController.m */,
 				F00637F01D82A1D80073C95D /* Supporting Files */,
 			);
 			path = CustomWebView;
@@ -272,7 +287,10 @@
 			files = (
 				F00637F81D82A1D80073C95D /* ViewController.m in Sources */,
 				F00637F51D82A1D80073C95D /* AppDelegate.m in Sources */,
+				F00638281D82B3F00073C95D /* SafariViewController.m in Sources */,
 				F00637F21D82A1D80073C95D /* main.m in Sources */,
+				F006382E1D82C3270073C95D /* CustomWebViewCotroller.m in Sources */,
+				F00638311D82C3EC0073C95D /* WKWebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,8 +8,10 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
-@interface AppDelegate ()
 
+
+#import "SafariViewController.h"
+@interface AppDelegate ()
 @end
 
 @implementation AppDelegate
@@ -18,10 +20,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     _window.frame=[UIScreen mainScreen].bounds;
-    _window.rootViewController=[[UINavigationController alloc] initWithRootViewController:[[ViewController alloc] init]];
+    _window.backgroundColor=[UIColor whiteColor];
+    UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:[[ViewController alloc] init]];
+    _window.rootViewController= nav;
     [_window makeKeyAndVisible];
     return YES;
 }
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

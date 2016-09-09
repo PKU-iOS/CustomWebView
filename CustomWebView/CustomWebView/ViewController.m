@@ -8,6 +8,10 @@
 
 #import "ViewController.h"
 
+#import "CustomWebViewCotroller.h"
+#import "SafariViewController.h"
+#import "WKWebViewController.h"
+
 @interface ViewController ()<UIWebViewDelegate>
 
 @property(nonatomic,strong) UIWebView *webView;
@@ -19,133 +23,50 @@
     CGFloat _currentOffSetY;
     
 }
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
     self.view.backgroundColor=[UIColor grayColor];
     
-    NSURL *url=[NSURL URLWithString:@"http://bbs.csdn.net/topics/391044716?page=1"];
-    [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
-
-    UIBlurEffect *effect=[UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
+    [self btnWithTitle:@"CustomWebView" tag:1000 frame:CGRectMake(self.view.center.x-50, 100, 100, 50)];
+    [self btnWithTitle:@"SafariView" tag:1001 frame:CGRectMake(self.view.center.x-50, 200, 100, 50)];
+    [self btnWithTitle:@"WKWebView" tag:1000 frame:CGRectMake(self.view.center.x-50, 300, 100, 50)];
     
-    UIVisualEffectView   *statueBarbackgroundView=[[UIVisualEffectView alloc]initWithEffect:effect];
-    statueBarbackgroundView.frame=CGRectMake(0, 0,[UIScreen mainScreen].bounds.size.width, 20);
-    
-    [self.navigationController.navigationBar.superview addSubview:statueBarbackgroundView];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShowNotification:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHideNotification:) name:UIKeyboardWillHideNotification object:nil];
-    
-    //    UIBarButtonItem *goBackItem=[[UIBarButtonItem alloc]initWithTitle:@"goBack" style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
-    //
-    //    UIBarButtonItem *goForwardItem=[[UIBarButtonItem alloc]initWithTitle:@"goForward" style:UIBarButtonItemStylePlain target:self action:@selector(goForward)];
-    //
-    //    UIBarButtonItem *reloadItem=[[UIBarButtonItem alloc]initWithTitle:@"reload" style:UIBarButtonItemStylePlain target:self action:@selector(reload)];
-    //
-    //    UIBarButtonItem *stopLoadingItem=[[UIBarButtonItem alloc]initWithTitle:@"stopLoading" style:UIBarButtonItemStylePlain target:self action:@selector(stopLoading)];
-    //
-    //    self.toolbarItems=@[goBackItem,goForwardItem,reloadItem,stopLoadingItem];
-    //    [self.navigationController setToolbarHidden:NO];
 }
 
-//-(void)goBack
-//{
-//    if(_webView.canGoBack)
-//    {
-//        [_webView goBack];//无效
-//    }
-//}
-//-(void)goForward
-//{
-//    if(_webView.canGoForward)
-//    {
-//        [_webView goForward];//无效
-//    }
-//}
-//-(void)reload
-//{
-//    [_webView reload];//无效
-//}
-//-(void)stopLoading
-//{
-//    [_webView stopLoading];//无效
-//}
-
--(void)viewDidAppear:(BOOL)animated
+-(void)btnWithTitle:(NSString *)title tag:(NSInteger)tag frame:(CGRect)frame
 {
-    [super viewDidAppear:animated];
-    [self addObserver:self forKeyPath:@"_webView.scrollView.contentOffset" options:NSKeyValueObservingOptionNew context:(__bridge void * _Nullable)(_webView.scrollView)];
+    UIButton *btn=[UIButton buttonWithType:UIButtonTypeSystem];
+    [btn setTitle:title forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(action:) forControlEvents:UIControlEventTouchDown|UIControlEventTouchDownRepeat];
+    btn.frame=frame;
+    btn.tag=tag;
+    [btn setBackgroundColor:[UIColor whiteColor]];
+    [self.view addSubview:btn];
 }
 
--(UIStatusBarStyle)preferredStatusBarStyle
+-(void)action:(UIButton *)sender
 {
-    return UIStatusBarStyleDefault;
-}
-
-
--(UIWebView *)webView
-{
-    if(!_webView)
-    {
-        _webView=[[UIWebView alloc]initWithFrame:self.view.bounds];
-        _webView.scrollView.bounces=NO;
-        _webView.allowsPictureInPictureMediaPlayback=YES;
-        //    webView.gapBetweenPages=1000.0;
-        //    webView.pageLength=[UIScreen mainScreen].bounds.size.width*0.5;
-        _webView.dataDetectorTypes=UIDataDetectorTypePhoneNumber |UIDataDetectorTypeLink | UIDataDetectorTypeAddress |UIDataDetectorTypeCalendarEvent;
-        _webView.delegate=self;
-        _webView.scalesPageToFit=YES;
-        _webView.paginationMode=UIWebPaginationModeUnpaginated;
-        [self.view addSubview:_webView];
+    switch (sender.tag) {
+        case 1000:
+            [self.navigationController pushViewController:[[CustomWebViewCotroller alloc]init] animated:YES];
+            break;
+        case 1001:
+            [self.navigationController pushViewController:[[SafariViewController alloc]init] animated:YES];
+            break;
+        case 1002:
+            [self.navigationController pushViewController:[[WKWebViewController alloc]init] animated:YES];
+            break;
+        default:
+            break;
     }
-    return _webView;
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-#pragma mark KVO
-
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
-{
-    CGFloat offsetY=((__bridge UIScrollView *)context).contentOffset.y;
-    if(offsetY>_currentOffSetY){
-        [self.navigationController setNavigationBarHidden:YES  animated:YES];
-    }else if(offsetY<_currentOffSetY){
-        [self.navigationController setNavigationBarHidden:NO  animated:YES];
-    }
-    _currentOffSetY=offsetY;
-    
-}
-
--(void)keyboardWillShowNotification:(NSNotification *)noti
-{
-    [self.navigationController setNavigationBarHidden:YES  animated:YES];
-}
-
--(void)keyboardWillHideNotification:(NSNotification *)noti
-{
-    [self.navigationController setNavigationBarHidden:NO  animated:YES];
-}
-
-#pragma mark delegate
-
--(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
-{
-    return UIWebViewNavigationTypeBackForward |UIWebViewNavigationTypeReload |UIWebViewNavigationTypeFormResubmitted |
-    UIWebViewNavigationTypeOther;
-}
-
-
--(void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-
 
 @end
