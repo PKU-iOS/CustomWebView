@@ -79,7 +79,6 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-
 -(UIStatusBarStyle)preferredStatusBarStyle
 {
     return UIStatusBarStyleDefault;
@@ -93,8 +92,6 @@
         _webView=[[UIWebView alloc]initWithFrame:self.view.bounds];
         _webView.scrollView.bounces=NO;
         _webView.allowsPictureInPictureMediaPlayback=YES;
-        //    webView.gapBetweenPages=1000.0;
-        //    webView.pageLength=[UIScreen mainScreen].bounds.size.width*0.5;
         _webView.dataDetectorTypes=UIDataDetectorTypePhoneNumber |UIDataDetectorTypeLink | UIDataDetectorTypeAddress |UIDataDetectorTypeCalendarEvent;
         _webView.delegate=self;
         _webView.allowsInlineMediaPlayback=YES;
@@ -154,6 +151,11 @@
     }];
 }
 
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self removeObserver:self forKeyPath:@"_webView.scrollView.contentOffset"];
+}
 #pragma mark delegate
 
 //-(void)webViewDidStartLoad:(UIWebView *)webView
@@ -172,10 +174,6 @@
 //
 //}
 
--(void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [self removeObserver:self forKeyPath:@"_webView.scrollView.contentOffset"];
-}
+
 
 @end
