@@ -37,40 +37,41 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShowNotification:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHideNotification:) name:UIKeyboardWillHideNotification object:nil];
     
-    //    UIBarButtonItem *goBackItem=[[UIBarButtonItem alloc]initWithTitle:@"goBack" style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
-    //
-    //    UIBarButtonItem *goForwardItem=[[UIBarButtonItem alloc]initWithTitle:@"goForward" style:UIBarButtonItemStylePlain target:self action:@selector(goForward)];
-    //
-    //    UIBarButtonItem *reloadItem=[[UIBarButtonItem alloc]initWithTitle:@"reload" style:UIBarButtonItemStylePlain target:self action:@selector(reload)];
-    //
-    //    UIBarButtonItem *stopLoadingItem=[[UIBarButtonItem alloc]initWithTitle:@"stopLoading" style:UIBarButtonItemStylePlain target:self action:@selector(stopLoading)];
-    //
-    //    self.toolbarItems=@[goBackItem,goForwardItem,reloadItem,stopLoadingItem];
-    //    [self.navigationController setToolbarHidden:NO];
+        UIBarButtonItem *goBackItem=[[UIBarButtonItem alloc]initWithTitle:@"goBack" style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
+    
+        UIBarButtonItem *goForwardItem=[[UIBarButtonItem alloc]initWithTitle:@"goForward" style:UIBarButtonItemStylePlain target:self action:@selector(goForward)];
+    
+        UIBarButtonItem *reloadItem=[[UIBarButtonItem alloc]initWithTitle:@"reload" style:UIBarButtonItemStylePlain target:self action:@selector(reload)];
+    
+        UIBarButtonItem *stopLoadingItem=[[UIBarButtonItem alloc]initWithTitle:@"stopLoading" style:UIBarButtonItemStylePlain target:self action:@selector(stopLoading)];
+    
+        self.toolbarItems=@[goBackItem,goForwardItem,reloadItem,stopLoadingItem];
+        [self.navigationController setToolbarHidden:NO];
 }
 
-//-(void)goBack
-//{
-//    if(_webView.canGoBack)
-//    {
-//        [_webView goBack];//无效
-//    }
-//}
-//-(void)goForward
-//{
-//    if(_webView.canGoForward)
-//    {
-//        [_webView goForward];//无效
-//    }
-//}
-//-(void)reload
-//{
-//    [_webView reload];//无效
-//}
-//-(void)stopLoading
-//{
-//    [_webView stopLoading];//无效
-//}
+
+-(void)goBack
+{
+    if(_webView.canGoBack)
+    {
+        [_webView goBack];//无效
+    }
+}
+-(void)goForward
+{
+    if(_webView.canGoForward)
+    {
+        [_webView goForward];//无效
+    }
+}
+-(void)reload
+{
+    [_webView reload];//无效
+}
+-(void)stopLoading
+{
+    [_webView stopLoading];//无效
+}
 
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -118,8 +119,10 @@
     CGFloat offsetY=((__bridge UIScrollView *)context).contentOffset.y;
     if(offsetY>_currentOffSetY){
         [self.navigationController setNavigationBarHidden:YES  animated:YES];
+        [self.navigationController setToolbarHidden:YES animated:YES];
     }else if(offsetY<_currentOffSetY){
         [self.navigationController setNavigationBarHidden:NO  animated:YES];
+        [self.navigationController setToolbarHidden:NO animated:YES];
     }
     _currentOffSetY=offsetY;
     

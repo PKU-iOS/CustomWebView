@@ -62,7 +62,7 @@
             [self.navigationController pushViewController:[[SafariViewController alloc]init] animated:YES];
             break;
         case 1002:
-            [self.navigationController pushViewController:[[WKWebViewController alloc]init] animated:YES];
+//            [self.navigationController pushViewController:[[WKWebViewController alloc]init] animated:YES];
             break;
         default:
             break;
